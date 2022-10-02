@@ -7,7 +7,14 @@ const useStoreTransactions = defineStore('storeTransactions', {
     }),
     actions: {
         init() {
-            this.loadTransactions()
+            this.loadTransactions().then(() => console.log('State Initialized'))
+
+            let subscribeToChanges = supabase 
+                .from('*')
+                .on('*', payload => {
+                    this.loadTransactions()
+                })
+                .subscribe()
         },
         async loadTransactions() {
             let { data: Transaction, error } = await supabase.from('Transaction').select('*')
