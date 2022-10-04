@@ -1,6 +1,6 @@
 <script setup>
     import useStoreTransactions from '../../stores/storeTransactions';
-    import Transaction from '../../Components/Transaction.vue'
+    import Transaction from '../../Components/Transactions/Transaction.vue'
 
     //Store 
     const storeTransactions = useStoreTransactions()

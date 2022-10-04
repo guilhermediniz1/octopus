@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue';
     import DeleteModal from './DeleteModal.vue';
-    import useStoreTransactions from '../stores/storeTransactions';
+    import useStoreTransactions from '../../stores/storeTransactions';
 
 // Props
     const props = defineProps({
@@ -26,7 +26,7 @@
     <div class="transaction" @mouseover="canEditAndDelete = true" @mouseleave="canEditAndDelete = false">
         <div class="transaction__content">
             <div class="transaction__icon__container">
-                <img class="transaction__icon" src="../assets/icons/out.svg" alt="">
+                <img class="transaction__icon" src="../../assets/icons/out.svg" alt="">
             </div>
             <div>
                 <p class="transaction__description">{{ props.description }}</p>
@@ -36,10 +36,10 @@
         <p v-if="!canEditAndDelete" class="transaction__value" >{{ props.value }}</p>
         <div class="button-group" v-else>
             <button class="button__edit">
-                <img class="button__icon" src="../assets/icons/edit.svg" alt="">
+                <img class="button__icon" src="../../assets/icons/edit.svg" alt="">
             </button>
             <button class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
-                <img class="button__icon" src="../assets/icons/delete.svg" alt="">
+                <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
             </button>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <script setup>
     import { useRouter } from 'vue-router';
-    import useStoreTransactions from '../stores/storeTransactions'
+    import useStoreTransactions from '../../stores/storeTransactions'
     
 // Props
     const props = defineProps({

@@ -1,7 +1,9 @@
 <script setup>
+    import Account from '../../Components/Accounts/Account.vue'
+    import useStoreAccounts from '../../stores/storeAccounts';
 
-import Account from '../../Components/Account.vue'
-
+// Store
+    const storeAccounts = useStoreAccounts()
 </script>
 
 <template>
@@ -12,10 +14,10 @@ import Account from '../../Components/Account.vue'
         <div class="container" >
             <strong class="container__title">Todas Contas</strong>
             <div class="container__content">
-                <Account />
-                <Account />
-                <Account />
-                <Account />
+                <Account 
+                    v-for="a in storeAccounts.accounts"
+                    :name="a.name"
+                />
             </div>
         </div>
     </div>

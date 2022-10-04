@@ -1,13 +1,19 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import useStoreTransactions from '../stores/storeTransactions'
+import useStoreTransactions from '../../stores/storeTransactions'
+
+// Props
+const props = defineProps({
+    route: String
+})
 
 // Stores
 const storeTransactions = useStoreTransactions()
 
 // Router
 const router = useRouter
+
 
 // Form data and submission
 const form = reactive({
@@ -42,16 +48,16 @@ function submitForm() {
                     <input class="transaction__date" type="date" name="date" id="date" v-model="form.date">
                     <input class="transaction__value" type="text" name="value" id="value" placeholder="R$100,00" v-model="form.value">
                     <div class="transaction__type">
-                        <label for="in">
-                            <input type="radio" name="type" id="in" value="1" v-model="form.type" required>
+                        <label class="transaction__type__label" for="in">
+                            <input class="transaction__type__radio" type="radio" name="type" id="in" value="1" v-model="form.type" required>
                             Entrada
                         </label>
-                        <label for="out">
-                            <input type="radio" name="type" id="out" value="2"  v-model="form.type">
+                        <label class="transaction__type__label" for="out">
+                            <input class="transaction__type__radio" type="radio" name="type" id="out" value="2"  v-model="form.type">
                             Saída
                         </label>
-                        <label for="transfer">
-                            <input type="radio" name="type" id="transfer" value="3" v-model="form.type">
+                        <label class="transaction__type__label" for="transfer">
+                            <input class="transaction__type__radio" type="radio" name="type" id="transfer" value="3" v-model="form.type">
                             Transferência
                         </label>
                     </div>
@@ -129,28 +135,14 @@ function submitForm() {
 .transaction__type {
     display: flex;
     flex-direction: column;
+
+    gap: 8px;
 }
 
-.transaction__description, 
-.transaction__date, 
-.transaction__value,
-.transaction__pay-method,
-.transaction__account {
-    height: 3rem;
-    width: 100%;
-    
-    padding: .5rem;
 
-    border: none;
-    outline: none;
-    border-radius: 8px;
-
-    font-family: 'DM Sans';
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: var(--white);
-
-    background-color: var(--light-gray);
+.transaction__type__radio {
+    width: fit-content;
+    height: fit-content;
 }
 
 .button-group {

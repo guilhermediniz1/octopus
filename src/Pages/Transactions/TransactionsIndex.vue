@@ -1,7 +1,6 @@
 <script setup>
-    import { computed } from 'vue'
     import useStoreTransactions from '../../stores/storeTransactions';
-    import Transaction from '../../Components/Transaction.vue';
+    import Transaction from '../../Components/Transactions/Transaction.vue';
 
     // Store - transactions
     const storeTransactions = useStoreTransactions()

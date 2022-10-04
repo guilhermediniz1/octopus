@@ -1,9 +1,12 @@
 <script setup>
-    import { RouterLink } from 'vue-router';
+    import { RouterLink, useRoute } from 'vue-router';
     import { ref } from 'vue';
 
-    import InsertModal from '../Components/InsertModal.vue';
+    import InsertTransactionModal from '../Components/Transactions/InsertModal.vue';
+    import InsertAccountModal from '../Components/Accounts/InsertModal.vue';
 
+// Route
+    const route = useRoute()
 
     function handleModal () {
         isInsertModalOpen.value = !isInsertModalOpen.value
@@ -31,7 +34,8 @@
             <img src="../assets/icons/credit-card.svg" alt="">
         </RouterLink>
     </nav>
-    <InsertModal @button-clicked="handleModal" v-if="isInsertModalOpen" />
+    <InsertTransactionModal @button-clicked="handleModal" v-if="isInsertModalOpen && route.fullPath == '/' || isInsertModalOpen && route.fullPath == '/transactions'" />
+    <InsertAccountModal @button-clicked="handleModal" v-else-if="isInsertModalOpen && route.fullPath == '/accounts'" />
 </template>
 
 <style scoped>

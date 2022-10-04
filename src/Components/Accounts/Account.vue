@@ -1,15 +1,19 @@
 <script setup>
+    import { RouterLink } from 'vue-router';
 
-import { RouterLink } from 'vue-router';
+// Props
+    const props = defineProps({
+        name: String,
+    })
 
 </script>
 
 <template>
     <RouterLink to="/accounts/2" class="account">
         <div class="account__tag__container">
-            <img class="account__tag" src="../assets/tags/tag-peach.svg" alt="">
+            <img class="account__tag" src="../../assets/tags/tag-peach.svg" alt="">
         </div>
-        <p class="account__name" >Inter</p>
+        <p class="account__name" >{{ props.name }}</p>
     </RouterLink>
 </template>
 
