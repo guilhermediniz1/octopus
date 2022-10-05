@@ -61,10 +61,4 @@
     font-weight: bolder;
     color: var(--light-gray);
 }
-
-.container__content {
-    max-height: 30vh;
-
-    overflow-y: scroll;
-}
 </style>

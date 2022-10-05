@@ -1,20 +1,31 @@
 <script setup>
-    import { RouterLink } from 'vue-router';
+    import { ref } from 'vue';
+    import DeleteModal from '../Transactions/DeleteModal.vue';
 
 // Props
     const props = defineProps({
         name: String,
+        id: String
     })
+
+    const canDelete = ref(false)
+    const isDeleteModalOpen = ref(false)
 
 </script>
 
 <template>
-    <RouterLink to="/accounts/2" class="account">
-        <div class="account__tag__container">
-            <img class="account__tag" src="../../assets/tags/tag-peach.svg" alt="">
+    <div class="account" @mouseover="canDelete = true" @mouseleave="canDelete = false">
+        <div class="account__content">
+            <div class="account__tag__container">
+                <img class="account__tag" src="../../assets/tags/tag-peach.svg" alt="">
+            </div>
+            <p class="account__name" >{{ props.name }}</p>
         </div>
-        <p class="account__name" >{{ props.name }}</p>
-    </RouterLink>
+        <button v-if="canDelete" class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
+            <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
+        </button>
+    </div>
+    <DeleteModal @button-clicked="isDeleteModalOpen = !isDeleteModalOpen" :id="props.id" v-if="isDeleteModalOpen" />
 </template>
 
 <style scoped>
@@ -26,12 +37,17 @@
 
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 16px;
+    justify-content: space-between;
 
     font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     background-color: var(--pure-white);
+}
+
+.account__content{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .account__tag__container {
@@ -50,5 +66,21 @@
     font-weight: bold;
 
     color: var(--gray);
+}
+
+.button__edit, .button__delete {
+    height: 24px;
+    width: 24px;
+
+    background: none;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.button__icon {
+    max-height: 100%;
+    max-width: 100%;
 }
 </style>

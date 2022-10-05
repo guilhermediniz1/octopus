@@ -17,13 +17,13 @@
     const storeTransactions = useStoreTransactions()
 
 //  Booleans
-    const canEditAndDelete = ref(false)
+    const canDelete = ref(false)
     const isDeleteModalOpen = ref(false)
 
 </script>
 
 <template>
-    <div class="transaction" @mouseover="canEditAndDelete = true" @mouseleave="canEditAndDelete = false">
+    <div class="transaction" @mouseover="canDelete = true" @mouseleave="canDelete = false">
         <div class="transaction__content">
             <div class="transaction__icon__container">
                 <img class="transaction__icon" src="../../assets/icons/out.svg" alt="">
@@ -33,11 +33,8 @@
                 <small class="transaction__date">{{ props.date }}</small>
             </div>
         </div>
-        <p v-if="!canEditAndDelete" class="transaction__value" >{{ props.value }}</p>
+        <p v-if="!canDelete" class="transaction__value" >{{ props.value }}</p>
         <div class="button-group" v-else>
-            <button class="button__edit">
-                <img class="button__icon" src="../../assets/icons/edit.svg" alt="">
-            </button>
             <button class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
                 <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
             </button>

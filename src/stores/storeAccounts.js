@@ -26,6 +26,9 @@ const useStoreAccounts = defineStore('storeAccounts', {
             const {data, error} = await supabase.from('Account').insert([{name, balance}])
             console.log(error)
         },
+        async deleteAccount(id) {
+            const { data, error } = await supabase.from('Account').delete().eq('id', id)
+        }
     },
     getters: {
         getAccounts() {

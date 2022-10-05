@@ -16,6 +16,8 @@
             <div class="container__content">
                 <Account 
                     v-for="a in storeAccounts.accounts"
+                    :key="a.id"
+                    :id="a.id"
                     :name="a.name"
                 />
             </div>

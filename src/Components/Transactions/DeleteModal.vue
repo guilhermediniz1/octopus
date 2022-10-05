@@ -1,26 +1,30 @@
 <script setup>
-    import { useRouter } from 'vue-router';
+    import { useRoute } from 'vue-router';
+    import useStoreAccounts from '../../stores/storeAccounts';
     import useStoreTransactions from '../../stores/storeTransactions'
     
 // Props
     const props = defineProps({
-        id: {
-            type: String,
-            default: ''
-        }
+        id: String,
+        type: String
     })
 
 // Stores
     const storeTransactions = useStoreTransactions()
+    const storeAccounts = useStoreAccounts()
 
 // Emits
     const emit = defineEmits(['buttonClicked'])
-    
-// Router
-    const router = useRouter
+
+// Route instance
+    const route = useRoute()
 
     function confirmDelete() {
-        storeTransactions.deleteTransaction(props.id)
+        if(route.fullPath == '/transactions' || route.fullPath == '/') {
+            storeTransactions.deleteTransaction(props.id)
+        } else if(route.fullPath == '/accounts') {
+            storeAccounts.deleteAccount(props.id)
+        }
         emit('buttonClicked')
     }
 
