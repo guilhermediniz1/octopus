@@ -1,5 +1,6 @@
 <script setup>
-    import { ref } from 'vue';
+    import { computed, ref } from 'vue';
+    import { RouterLink } from 'vue-router';
     import DeleteModal from '../Transactions/DeleteModal.vue';
 
 // Props
@@ -11,16 +12,20 @@
     const canDelete = ref(false)
     const isDeleteModalOpen = ref(false)
 
+    const pathToView = computed(() => {
+        return `/accounts/${props.id}`
+    })
+
 </script>
 
 <template>
     <div class="account" @mouseover="canDelete = true" @mouseleave="canDelete = false">
-        <div class="account__content">
+        <RouterLink :to="pathToView" class="account__content">
             <div class="account__tag__container">
                 <img class="account__tag" src="../../assets/tags/tag-peach.svg" alt="">
             </div>
             <p class="account__name" >{{ props.name }}</p>
-        </div>
+        </RouterLink>
         <button v-if="canDelete" class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
             <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
         </button>

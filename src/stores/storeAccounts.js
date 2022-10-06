@@ -2,11 +2,9 @@ import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 
 const useStoreAccounts = defineStore('storeAccounts', {
-    state:() => {
-        return {
-            accounts: []
-        }
-    },
+    state:() => ({
+        accounts: []
+    }),
     actions: {
         init() {
             this.loadAccounts()
@@ -19,22 +17,40 @@ const useStoreAccounts = defineStore('storeAccounts', {
                 .subscribe()
         },
         async loadAccounts() {
-            let { data: Account, error } = await supabase.from('Account').select('*')
+            const { data: Account, error } = await supabase
+                .from('Account')
+                .select('*')
             this.accounts = Account
         },
         async addAccount({name, balance}) {
-            const {data, error} = await supabase.from('Account').insert([{name, balance}])
-            console.log(error)
+            const {data, error} = await supabase
+                .from('Account')
+                .insert([{name, balance}])
         },
         async deleteAccount(id) {
-            const { data, error } = await supabase.from('Account').delete().eq('id', id)
+            const { data, error } = await supabase
+                .from('Account')
+                .delete()
+                .eq('id', id)
+        },
+        async updateBalance(id, newBalance) {
+            const { data, error } = await supabase
+                .from('Account')
+                .update({ balance: newBalance })
+                .eq('id', id)
         }
     },
     getters: {
         getAccounts() {
             return this.accounts
+        },
+        getAccountById: (state) => {
+            return (id) => {
+                return state.accounts.filter(account => account.id === id)[0]
+            }
         }
-    }
+    },
+    persist: true
 })
 
 export default useStoreAccounts

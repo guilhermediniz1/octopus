@@ -11,7 +11,7 @@ import Header from './Layout/Header.vue'
 const storeTransactions = useStoreTransactions()
 const storeAccounts = useStoreAccounts()
 
-// Loading all transactions
+// Loading all transactions, accounts
 onBeforeMount(() => {
   storeTransactions.init()
   storeAccounts.init()

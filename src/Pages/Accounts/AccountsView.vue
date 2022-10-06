@@ -1,21 +1,43 @@
 <script setup>
+
+    import { onBeforeMount, onMounted, reactive, ref } from 'vue';
+    import { useRoute } from 'vue-router';
+    import useStoreAccounts from '../../stores/storeAccounts';
+    import EditModal from '../../Components/Accounts/EditModal.vue';
+
+// Store
+    const storeAccounts = useStoreAccounts()
+
+// Route instance
+    const route = useRoute()
+
+    const isEditing = ref(false)
+
+    const currentAccount = reactive({})
+
+    onMounted(() => {
+        currentAccount.name = storeAccounts.getAccountById(route.params.id).name
+        currentAccount.balance = storeAccounts.getAccountById(route.params.id).balance
+    })
+    
 </script>
 
 <template>
     <div class="container">
         <div class="account__header">
             <img class="account__header__tag" src="../../assets/tags/tag-lightblue.svg" alt="">
-            <h1 class="account__header__name">Conta{{ $route.params.id }}</h1>
+            <h1 class="account__header__name">{{ currentAccount.name }}</h1>
         </div>
         <div class="account__info">
             <strong class="account__info__text">Saldo da Conta</strong>
-            <p class="account__info__value">R$5024,30</p>
+            <p class="account__info__value">R$ {{ currentAccount.balance }}</p>
         </div>
         <div class="menu">
-            <div class="menu__item">Editar saldo</div>
+            <button @click="isEditing = !isEditing" class="menu__item">Editar saldo</button>
             <div class="menu__item">Cartões</div>
         </div>
     </div>
+    <EditModal @button-clicked="isEditing = !isEditing" v-if="isEditing" />
 </template>
 
 <style scoped>
@@ -82,11 +104,23 @@
     font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     font-weight: bold;
+    color: var(--white);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    border: none;
+    outline: none;
+
     background-color: var(--light-gray);
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.menu__item:hover {
+    opacity: .75;
 }
 </style>
