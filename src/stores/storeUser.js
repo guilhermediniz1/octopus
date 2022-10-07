@@ -1,13 +1,17 @@
 import { defineStore } from 'pinia'
+import { supabase } from '../supabase'
 
-const useStoreUser = defineStore('sotoreUser', {
+const useStoreUser = defineStore('storeUser', {
     state:() => {
         return {
-            name: 'Guilherme Diniz Láu',
-            totalBalance: 500.26
+            user: {}
         }
     },
-    actions: {},
+    actions: {
+        async loginUser(email) {
+            let { user, error } = await supabase.auth.signIn({ email })
+        },
+    },
     getters: {}
 })
 
