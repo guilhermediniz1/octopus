@@ -30,9 +30,6 @@
         <RouterLink to="/accounts" >
             <img src="../assets/icons/accounts.svg" alt="">
         </RouterLink>
-        <RouterLink to="/credit-cards" >
-            <img src="../assets/icons/credit-card.svg" alt="">
-        </RouterLink>
     </nav>
     <InsertTransactionModal @button-clicked="handleModal" v-if="isInsertModalOpen && route.fullPath == '/' || isInsertModalOpen && route.fullPath == '/transactions'" />
     <InsertAccountModal @button-clicked="handleModal" v-else-if="isInsertModalOpen && route.fullPath == '/accounts'" />
