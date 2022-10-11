@@ -5,20 +5,34 @@ import TransactionsView from '../Pages/Transactions/TransactionsIndex.vue'
 import AccountsIndex from '../Pages/Accounts/AccountsIndex.vue'
 import AccountsView from '../Pages/Accounts/AccountsView.vue'
 
+import { createRouter, createWebHistory } from 'vue-router'
+import { supabase } from '../supabase' 
+import { SupabaseClient } from '@supabase/supabase-js'
+
 const routes = [
     // Authentication
-    {path: '/authentication', component: Auth},
+    {name: 'Auth', path: '/authentication', component: Auth},
 
     // Home
-    {path: '/', component: Home},
+    {name: 'Home', path: '/', component: Home},
 
     // Transactions
-    {path: '/transactions', component: TransactionsIndex},
+    {name: 'Transactions', path: '/transactions', component: TransactionsIndex},
     {path: '/transactions/:id', component: TransactionsView},
 
     // Accounts
-    {path: '/accounts', component: AccountsIndex},
+    {name: 'Account', path: '/accounts', component: AccountsIndex},
     {path: '/accounts/:id', component: AccountsView},
 ]
 
-export default routes
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
+// Navigation Guards
+router.beforeEach(async (to, from) => {
+    console
+})
+
+export default router
