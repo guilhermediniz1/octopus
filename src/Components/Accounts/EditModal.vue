@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue'
     import { useRoute } from 'vue-router'
-    import useStoreAccounts from '../../stores/storeAccounts';
+    import { useStoreAccounts } from '@/stores/storeAccounts';
 
 // Stores
     const storeAccounts = useStoreAccounts()

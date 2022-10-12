@@ -2,7 +2,7 @@
 
     import { onBeforeMount, onMounted, reactive, ref } from 'vue';
     import { useRoute } from 'vue-router';
-    import useStoreAccounts from '../../stores/storeAccounts';
+    import { useStoreAccounts } from '@/stores/storeAccounts';
     import EditModal from '../../Components/Accounts/EditModal.vue';
 
 // Store

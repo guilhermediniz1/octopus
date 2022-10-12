@@ -1,7 +1,7 @@
 <script setup>
     import { useRoute } from 'vue-router';
-    import useStoreAccounts from '../../stores/storeAccounts';
-    import useStoreTransactions from '../../stores/storeTransactions'
+    import { useStoreAccounts } from '@/stores/storeAccounts';
+    import { useStoreTransactions } from '@/stores/storeTransactions'
     
 // Props
     const props = defineProps({

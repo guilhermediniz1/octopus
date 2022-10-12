@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue';
     import DeleteModal from './DeleteModal.vue';
-    import useStoreTransactions from '../../stores/storeTransactions';
+    import { useStoreTransactions } from '@/stores/storeTransactions';
 
 // Props
     const props = defineProps({

@@ -1,5 +1,5 @@
 <script setup>
-    import useStoreTransactions from '../../stores/storeTransactions';
+    import { useStoreTransactions } from '@/stores/storeTransactions';
     import Transaction from '../../Components/Transactions/Transaction.vue';
 
     // Store - transactions

@@ -1,6 +1,6 @@
 <script setup>
     import Account from '../../Components/Accounts/Account.vue'
-    import useStoreAccounts from '../../stores/storeAccounts';
+    import { useStoreAccounts } from '@/stores/storeAccounts';
 
 // Store
     const storeAccounts = useStoreAccounts()

@@ -1,9 +1,9 @@
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import { onMounted } from 'vue';
-import useStoreTransactions from './stores/storeTransactions'; 
-import useStoreAccounts from './stores/storeAccounts';
-import useStoreUser from './stores/storeUser';
+import { useStoreTransactions } from '@/stores/storeTransactions'; 
+import { useStoreAccounts } from '@/stores/storeAccounts';
+import { useStoreUser } from '@/stores/storeUser';
 
 import NavBar from './Layout/NavBar.vue'
 import Header from './Layout/Header.vue'
@@ -26,7 +26,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="route.path != '/authentication' && route.path != '/register'" class="app-content">
+  <div v-if="route.path != '/auth' && route.path != '/auth/register'" class="app-content">
     <Header />
     <RouterView />
     <NavBar />

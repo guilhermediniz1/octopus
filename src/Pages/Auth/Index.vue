@@ -1,7 +1,8 @@
 <script setup>
-    import { ref } from 'vue';
+    import { onBeforeMount, onMounted, reactive, ref } from 'vue';
     import { useRoute } from 'vue-router';
-    import useStoreUser from '../../stores/storeUser'
+    import { useStoreUser } from '@/stores/storeUser'
+    import { RouterLink } from 'vue-router';
 
 // Route
     const route = useRoute()
@@ -9,17 +10,18 @@
 // Store
     const storeUser = useStoreUser()
 
-    function loginUser() {
-        storeUser.loginUser(email.value)
-    }
-
 // Form 
-    const email = ref('')
-    const isSubmitted = ref(false)
+    const userCredential = reactive({
+        email: '',
+        password: ''
+    })
 
     function handleFormSubmit() {
-        loginUser()
-        isSubmitted.value = true
+        if(route.path === '/auth/register') {
+            storeUser.registerUser(userCredential)
+        } else if (route.path === '/auth') {
+            storeUser.loginUser(userCredential)
+        }
     }
 </script>
 
@@ -29,13 +31,12 @@
             <img class="container__logo__image" src="../../assets/images/logo.svg" alt="">
         </div>
         <div class="authorization-card">
-            <form v-if="!isSubmitted" @submit.prevent="handleFormSubmit" class="authorization-card__form" action="">
-                <input type="email" name="email" id="email" placeholder="E-mail" v-model="email">
-                <button class="button button-add" type="submit">Login</button>
+            <form @submit.prevent="handleFormSubmit" class="authorization-card__form" action="">
+                <input type="email" name="email" id="email" placeholder="E-mail" v-model="userCredential.email">
+                <input type="password" name="password" id="password" placeholder="Senha" v-model="userCredential.password">
+                <p v-if="route.path === '/auth'" class="text">Ainda não possui uma conta? <RouterLink class="text__link" to="/auth/register">Registre-se aqui.</RouterLink></p>
+                <button class="button button-add" type="submit">{{ route.path === '/auth' ? 'Login' : 'Registrar-se' }}</button>
             </form>
-            <div v-else>
-                <p class="authorization__message-success">O link de acesso foi enviado para seu email</p>
-            </div>
         </div>
     </div>
 </template>
@@ -97,6 +98,17 @@
 
 .authorization__message-success {
     text-align: center;
+}
+
+.text {
+    font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+.text__link {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .button {

@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import useStoreAccounts from '../../stores/storeAccounts'
+import { useStoreAccounts } from '@/stores/storeAccounts'
 
 // Stores
     const storeAccounts = useStoreAccounts()
@@ -12,7 +12,7 @@ import useStoreAccounts from '../../stores/storeAccounts'
 // Form data and submission
     const form = reactive({
         name: "",
-        balance: ""
+        balance: 0
     })
 
     const emit = defineEmits(['buttonClicked'])
@@ -31,7 +31,7 @@ import useStoreAccounts from '../../stores/storeAccounts'
                 <div class="modal__dotch"></div>
                 <form class="modal__form" action="" @submit.prevent="submitForm" autocomplete="off">
                     <input class="account__name" type="text" name="name" id="name" placeholder="Nome para Conta" v-model="form.name">
-                    <input class="account__balance" type="text" name="balance" id="balance" placeholder="Saldo da Conta" v-model="form.balance">
+                    <input class="account__balance" type="number" name="balance" id="balance" placeholder="Saldo da Conta" v-model="form.balance">
                     <div class="button-group">
                         <button class="button button-cancel" @click.prevent="emit('buttonClicked')">Cancelar</button>
                         <button class="button button-add" type="submit">Adicionar</button>

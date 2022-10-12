@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import useStoreTransactions from '../../stores/storeTransactions'
+import { useStoreTransactions } from '@/stores/storeTransactions'
 
 // Props
 const props = defineProps({
@@ -19,7 +19,7 @@ const router = useRouter
 const form = reactive({
     description: "",
     date: "",
-    value: "", 
+    value: 0, 
     type: 0, 
     pay_method: "",
     // account: "" 
@@ -46,7 +46,7 @@ function submitForm() {
                 <form class="modal__form" action="" @submit.prevent="submitForm" autocomplete="off">
                     <input class="transaction__description" type="text" name="description" id="description" placeholder="Descrição" v-model="form.description">
                     <input class="transaction__date" type="date" name="date" id="date" v-model="form.date">
-                    <input class="transaction__value" type="text" name="value" id="value" placeholder="R$100,00" v-model="form.value">
+                    <input class="transaction__value" type="number" name="value" id="value" placeholder="R$100,00" v-model="form.value">
                     <div class="transaction__type">
                         <label class="transaction__type__label" for="in">
                             <input class="transaction__type__radio" type="radio" name="type" id="in" value="1" v-model="form.type" required>

@@ -4,14 +4,15 @@ import TransactionsIndex from '../Pages/Transactions/TransactionsIndex.vue'
 import TransactionsView from '../Pages/Transactions/TransactionsIndex.vue'
 import AccountsIndex from '../Pages/Accounts/AccountsIndex.vue'
 import AccountsView from '../Pages/Accounts/AccountsView.vue'
-
+import { useStoreUser } from '@/stores/storeUser'
 import { createRouter, createWebHistory } from 'vue-router'
-import { supabase } from '../supabase' 
-import { SupabaseClient } from '@supabase/supabase-js'
+
+
 
 const routes = [
     // Authentication
-    {name: 'Auth', path: '/authentication', component: Auth},
+    {name: 'Auth', path: '/auth', component: Auth},
+    {name: 'AuthRegister', path: '/auth/register', component: Auth},
 
     // Home
     {name: 'Home', path: '/', component: Home},
@@ -32,7 +33,14 @@ const router = createRouter({
 
 // Navigation Guards
 router.beforeEach(async (to, from) => {
-    console
+    const storeUser = useStoreUser()
+
+    if(!storeUser.user.id && (to.name !== 'Auth' && to.name !== 'AuthRegister')) {
+        return {name: 'Auth'}
+    }
+    if(storeUser.user.id && (to.name === 'Auth' || to.name === 'AuthRegister')) {
+        return false
+    }
 })
 
 export default router

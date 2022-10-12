@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
-    import useStoreUser from '../stores/storeUser'
+    import { useStoreUser } from '@/stores/storeUser'
 
     const isDropdownOpen = ref(false)
 
@@ -13,7 +13,7 @@
 
     function logoutUser() {
         storeUser.logoutUser()
-        router.push('/authentication')
+        router.push('/auth/login')
     }
 
 </script>
