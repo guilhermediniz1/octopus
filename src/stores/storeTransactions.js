@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { collection, query, orderBy, doc, setDoc, deleteDoc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 import { v4 as uuid } from 'uuid'
+import { useStoreUser } from '@/stores/storeUser'
 
 let transactionsCollectionRef
 let transactionsCollectionQuery
@@ -16,7 +17,8 @@ export const useStoreTransactions = defineStore('storeTransactions', {
     }),
     actions: {
         init() {
-            transactionsCollectionRef = collection(db, 'Transaction')
+            const storeUser = useStoreUser()
+            transactionsCollectionRef = collection(db, 'User', storeUser.user.id, 'Transaction')
             transactionsCollectionQuery = query(transactionsCollectionRef, orderBy('date', 'desc'))
             this.getTransactions()
         },
@@ -48,11 +50,14 @@ export const useStoreTransactions = defineStore('storeTransactions', {
             this.transactions = []
         },
         async addTransaction({description, date, value, type, pay_method}) {
-            const transactionRef = doc(db, 'Transaction', uuid());
+            const storeUser = useStoreUser()
+            const transactionRef = doc(db, 'User',storeUser.user.id,'Transaction', uuid());
             setDoc(transactionRef, { description, date, value, type, pay_method});
         },
         async deleteTransaction(id) {
-            await deleteDoc(doc(db, "Transaction", id));
+            const storeUser = useStoreUser()
+
+            await deleteDoc(doc(db, 'User',storeUser.user.id,'Transaction', id));
         }
     },
     getters: {}

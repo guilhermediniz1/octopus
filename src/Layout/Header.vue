@@ -13,7 +13,7 @@
 
     function logoutUser() {
         storeUser.logoutUser()
-        router.push('/auth/login')
+        router.push('/auth')
     }
 
 </script>

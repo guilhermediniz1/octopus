@@ -18,8 +18,6 @@ const route = useRoute()
 
 // Loading all transactions, accounts
 onMounted(() => {
-  storeTransactions.init()
-  storeAccounts.init()
   storeUser.init()
 })
 

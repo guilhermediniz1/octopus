@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { collection, query, orderBy, doc, setDoc, deleteDoc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 import { v4 as uuid } from 'uuid'
+import { useStoreUser } from '@/stores/storeUser'
 
 let accountsCollectionRef
 let accountsCollectionQuery
@@ -16,7 +17,8 @@ export const useStoreAccounts = defineStore('storeAccounts', {
     }),
     actions: {
         init() {
-            accountsCollectionRef = collection(db, 'Account')
+            const storeUser = useStoreUser()
+            accountsCollectionRef = collection(db, 'User', storeUser.user.id, 'Account')
             accountsCollectionQuery = query(accountsCollectionRef, orderBy('name', 'desc'))
             this.getAccounts()
         },
@@ -45,11 +47,13 @@ export const useStoreAccounts = defineStore('storeAccounts', {
             this.accounts = []
         },
         async addAccount({name, balance}) {
-            const accountRef = doc(db, 'Account', uuid());
+            const storeUser = useStoreUser()
+            const accountRef = doc(db, 'User', storeUser.user.id, 'Account', uuid());
             setDoc(accountRef, { name, balance});
         },
         async deleteAccount(id) {
-            await deleteDoc(doc(db, "Account", id));
+            const storeUser = useStoreUser()
+            await deleteDoc(doc(db, 'User', storeUser.user.id, 'Account', id));
         },
         async updateBalance(id, newBalance) {
         }
