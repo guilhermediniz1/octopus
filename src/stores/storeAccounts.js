@@ -13,7 +13,7 @@ let getAccountsSnapshot = null
 export const useStoreAccounts = defineStore('storeAccounts', {
     state:() => ({
         accounts: [],
-        accountsLoaded: false
+        accountsLoaded: false,
     }),
     actions: {
         init() {
@@ -54,9 +54,13 @@ export const useStoreAccounts = defineStore('storeAccounts', {
         async deleteAccount(id) {
             const storeUser = useStoreUser()
             await deleteDoc(doc(db, 'User', storeUser.user.id, 'Account', id));
-        },
-        async updateBalance(id, newBalance) {
         }
     },
-    getters: {},
+    getters: {
+        totalBalance() {
+            let totalBalance = 0
+            this.accounts.forEach(account => totalBalance += account.balance)
+            return totalBalance.toFixed(2)
+        }
+    },
 })

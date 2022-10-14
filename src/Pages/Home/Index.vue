@@ -1,16 +1,18 @@
 <script setup>
     import { useStoreTransactions } from '@/stores/storeTransactions';
+    import { useStoreAccounts } from '../../stores/storeAccounts';
     import Transaction from '@/Components/Transactions/Transaction.vue'
 
     //Store 
     const storeTransactions = useStoreTransactions()
+    const storeAccounts  = useStoreAccounts()
 </script>
 
 <template>
     <div class="grid-container">
         <div class="balance">
             <p class="balance__text">Saldo Total</p>
-            <h2 class="balance__value">R$ 1058,70</h2>
+            <h2 class="balance__value">R$ {{ storeAccounts.totalBalance.replace('.', ',') }}</h2>
         </div>
         <div class="container" >
             <strong class="container__title">Últimas Transações</strong>
