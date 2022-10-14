@@ -23,7 +23,9 @@
                   :id="t.id"
                   :description="t.description"
                   :date="t.date"
-                  :value="t.value" />
+                  :value="t.value"
+                  :type="t.type"
+                  />
             </div>
         </div>  
     </div>

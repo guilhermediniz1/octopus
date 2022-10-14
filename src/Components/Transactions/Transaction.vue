@@ -2,12 +2,13 @@
     import { ref } from 'vue';
     import DeleteModal from './DeleteModal.vue';
     import { useStoreTransactions } from '@/stores/storeTransactions';
+    import { formatDate } from '@/utils/utils.js'
 
 // Props
     const props = defineProps({
         id: String,
         iconPath: String,
-        type: Int16Array,
+        type: String,
         description: String,
         date: String,
         value: Number,
@@ -20,20 +21,25 @@
     const canDelete = ref(false)
     const isDeleteModalOpen = ref(false)
 
+// Icon path
+    function iconURL() { 
+        return new URL(`../../assets/icons/${props.type}.svg`, import.meta.url).href
+    }
+
 </script>
 
 <template>
     <div class="transaction" @mouseover="canDelete = true" @mouseleave="canDelete = false">
         <div class="transaction__content">
             <div class="transaction__icon__container">
-                <img class="transaction__icon" src="../../assets/icons/out.svg" alt="">
+                <img class="transaction__icon" :src="iconURL()" alt="">
             </div>
             <div>
                 <p class="transaction__description">{{ props.description }}</p>
-                <small class="transaction__date">{{ props.date }}</small>
+                <small class="transaction__date">{{ formatDate(props.date) }}</small>
             </div>
         </div>
-        <p v-if="!canDelete" class="transaction__value" >{{ props.value }}</p>
+        <p v-if="!canDelete" class="transaction__value" >R$ {{ (props.value.toFixed(2)).replace('.', ',') }}</p>
         <div class="button-group" v-else>
             <button class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
                 <img class="button__icon" src="../../assets/icons/delete.svg" alt="">

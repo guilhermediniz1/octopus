@@ -49,15 +49,15 @@ function submitForm() {
                     <input class="transaction__value" type="number" name="value" id="value" placeholder="R$100,00" v-model="form.value">
                     <div class="transaction__type">
                         <label class="transaction__type__label" for="in">
-                            <input class="transaction__type__radio" type="radio" name="type" id="in" value="1" v-model="form.type" required>
+                            <input class="transaction__type__radio" type="radio" name="type" id="in" value="in" v-model="form.type" required>
                             Entrada
                         </label>
                         <label class="transaction__type__label" for="out">
-                            <input class="transaction__type__radio" type="radio" name="type" id="out" value="2"  v-model="form.type">
+                            <input class="transaction__type__radio" type="radio" name="type" id="out" value="out"  v-model="form.type">
                             Saída
                         </label>
                         <label class="transaction__type__label" for="transfer">
-                            <input class="transaction__type__radio" type="radio" name="type" id="transfer" value="3" v-model="form.type">
+                            <input class="transaction__type__radio" type="radio" name="type" id="transfer" value="transfer" v-model="form.type">
                             Transferência
                         </label>
                     </div>
