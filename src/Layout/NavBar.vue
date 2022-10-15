@@ -7,13 +7,6 @@
 
 // Route
     const route = useRoute()
-
-    function handleModal () {
-        isInsertModalOpen.value = !isInsertModalOpen.value
-    }
-
-    const isInsertModalOpen = ref(false)
-
 </script>
 
 <template>
@@ -24,15 +17,11 @@
         <RouterLink to="/transactions" >
             <img src="../assets/icons/transactions.svg" alt="">
         </RouterLink>
-        <button @click="handleModal" class="main-button">
-            <img src="../assets/icons/plus.svg" alt="">
-        </button>
         <RouterLink to="/accounts" >
             <img src="../assets/icons/accounts.svg" alt="">
         </RouterLink>
     </nav>
-    <InsertTransactionModal @button-clicked="handleModal" v-if="isInsertModalOpen && route.fullPath == '/' || isInsertModalOpen && route.fullPath == '/transactions'" />
-    <InsertAccountModal @button-clicked="handleModal" v-else-if="isInsertModalOpen && route.fullPath == '/accounts'" />
+    <InsertAccountModal @button-clicked="handleModal" />
 </template>
 
 <style scoped>

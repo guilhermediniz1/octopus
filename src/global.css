@@ -51,7 +51,7 @@ a {
 }
 
 
-.button {
+.button, .button--add, .button--delete, .button--cancel {
     width: fit-content;
 
     align-self: flex-end;
@@ -73,21 +73,21 @@ a {
     transition: all .2s ease;
 }
 
-.button:hover {
+[class^='button']:hover {
     opacity: .75;
 }
 
-.button-add {
+.button--add {
     background-color: var(--green);
 }
 
-.button-delete {
+.button--delete {
     color: var(--white);
 
     background-color: var(--red);
 }
 
-.button-cancel {
+.button--cancel {
     color: var(--white);
 
     background-color: var(--light-gray);
