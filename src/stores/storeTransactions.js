@@ -3,6 +3,7 @@ import { collection, query, orderBy, doc, setDoc, deleteDoc, onSnapshot } from '
 import { db } from '../firebase'
 import { v4 as uuid } from 'uuid'
 import { useStoreUser } from '@/stores/storeUser'
+import { useStoreAccounts } from '@/stores/storeAccounts'
 
 let transactionsCollectionRef
 let transactionsCollectionQuery
@@ -49,10 +50,14 @@ export const useStoreTransactions = defineStore('storeTransactions', {
         clearTransactions() {
             this.transactions = []
         },
-        async addTransaction({description, date, value, type, pay_method}) {
+        async addTransaction({description, date, value, type, pay_method, account_id}) {
             const storeUser = useStoreUser()
+            const storeAccounts = useStoreAccounts()
+
             const transactionRef = doc(db, 'User',storeUser.user.id,'Transaction', uuid());
-            setDoc(transactionRef, { description, date, value, type, pay_method});
+            setDoc(transactionRef, { description, date, value, type, pay_method, account_id});
+
+            storeAccounts.updateAccounts(value, type, account_id)
         },
         async deleteTransaction(id) {
             const storeUser = useStoreUser()

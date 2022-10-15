@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStoreTransactions } from '@/stores/storeTransactions'
+import { useStoreAccounts } from '@/stores/storeAccounts'
 
 // Props
 const props = defineProps({
@@ -10,6 +11,7 @@ const props = defineProps({
 
 // Stores
 const storeTransactions = useStoreTransactions()
+const storeAccounts = useStoreAccounts()
 
 // Router
 const router = useRouter
@@ -22,11 +24,7 @@ const form = reactive({
     value: 0, 
     type: 0, 
     pay_method: "",
-    // account: "" 
-    /* 
-        Erro no formato da conta - (deveria ser uuid())
-        > Devido à relação de cada transação com a conta, o formato aqui deveria 
-    */
+    account_id: "" 
 })
 
 const emit = defineEmits(['buttonClicked'])
@@ -62,16 +60,18 @@ function submitForm() {
                         </label>
                     </div>
                     <select class="transaction__pay-method" name="pay-method" id="pay-method" v-model="form.pay_method">
-                        <option value="">Selecione o método</option>
-                        <option value="inter">Cartão de crédito</option>
-                        <option value="nubank">adicionar os métodos de pagamento da pessoa aqui</option>
+                        <option value="" selected disabled>Método de pagamento</option>
+                        <option value="credit-card">Cartão de Crédito</option>
+                        <option value="debit">Débito</option>
+                        <option value="cash">Dinheiro Físico</option>
+                        <option value="pix">Pix</option>
+                        <option value="ted">TED</option>
+                        <option value="doc">DOC</option>
+                        <option value="check">Cheque</option>
                     </select>
-                    <select class="transaction__account" name="accounts" id="accounts" v-model="form.account">
-                        <option value="">Selecione a conta</option>
-                        <option value="inter">Inter</option>
-                        <option value="nubank">Nubank</option>
-                        <option value="picpay">PicPay</option>
-                        <option value="c6">C6</option>
+                    <select class="transaction__account" name="accounts" id="accounts" v-model="form.account_id">
+                        <option value="" selected disabled>Conta de Origem</option>
+                        <option v-for="account in storeAccounts.accounts" :key="account.id" :value="account.id">{{ account.name }}</option>
                     </select>
                     <div class="button-group">
                         <button class="button button-cancel" @click.prevent="emit('buttonClicked')">Cancelar</button>
