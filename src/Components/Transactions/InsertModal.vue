@@ -54,10 +54,6 @@ function submitForm() {
                             <input class="transaction__type__radio" type="radio" name="type" id="out" value="out"  v-model="form.type">
                             Saída
                         </label>
-                        <label class="transaction__type__label" for="transfer">
-                            <input class="transaction__type__radio" type="radio" name="type" id="transfer" value="transfer" v-model="form.type">
-                            Transferência
-                        </label>
                     </div>
                     <select class="transaction__pay-method" name="pay-method" id="pay-method" v-model="form.pay_method">
                         <option value="" selected disabled>Método de pagamento</option>
@@ -70,7 +66,7 @@ function submitForm() {
                         <option value="check">Cheque</option>
                     </select>
                     <select class="transaction__account" name="accounts" id="accounts" v-model="form.account_id">
-                        <option value="" selected disabled>Conta de Origem</option>
+                        <option value="" selected disabled>Conta</option>
                         <option v-for="account in storeAccounts.accounts" :key="account.id" :value="account.id">{{ account.name }}</option>
                     </select>
                     <div class="button-group">

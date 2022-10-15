@@ -7,15 +7,11 @@
 // Props
     const props = defineProps({
         id: String,
-        iconPath: String,
         type: String,
         description: String,
         date: String,
         value: Number,
     })
-
-// Store
-    const storeTransactions = useStoreTransactions()
 
 //  Booleans
     const canDelete = ref(false)
