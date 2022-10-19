@@ -33,7 +33,8 @@
 
 <style scoped>
 .grid-container {
-    height: 100%;
+    height: 100vh;
+    padding-top: 4rem;
 
     display: grid;
 

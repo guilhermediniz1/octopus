@@ -8,9 +8,6 @@
 
 <template>
     <div class="grid-container">
-        <div class="title">
-            <p class="title__text">Contas</p>
-        </div>
         <div class="container" >
             <strong class="container__title">Todas Contas</strong>
             <div class="container__content">
@@ -27,28 +24,11 @@
 
 <style scoped>
 .grid-container {
-    height: 100%;
+    height: 100vh;
+    padding-top: 4rem;
 
     display: grid;
-    grid-template-rows: 1fr 2fr;
-}
-
-.title {
-    padding: 116px 0 36px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    color: var(--pure-white);
-}
-
-.title__text {
-    font-family: 'Poppins';
-    font-size: 24px;
-    font-weight: bolder;
-    color: var(--pure-white);
+    grid-template-rows: 1fr;
 }
 
 .container {

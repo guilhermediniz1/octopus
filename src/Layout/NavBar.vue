@@ -72,13 +72,19 @@ nav {
 }
 
 .main-button {
-    transform: translateY(-50%);
+    transform: translateY(-65%);
 
     width: 40px;
     height: 40px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border: none;
     border-radius: 50%;
+
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
 
     outline: none;
     background: linear-gradient(45deg, var(--dark-green), var(--light-green));

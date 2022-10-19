@@ -1,16 +1,29 @@
 <script setup>
-    import { RouterLink } from 'vue-router'
+    import { RouterLink, useRoute } from 'vue-router'
+
+// Route
+    const route = useRoute()
+
 </script>
 <template>
     <header class="header">
-        <RouterLink to="/">
-            <img class="logo" src="../assets/images/logo.svg" alt="">
-        </RouterLink>
+        <template v-if="route.path === '/'">
+            <RouterLink to="/">
+                <img class="logo" src="../assets/images/logo.svg" alt="">
+            </RouterLink>
+        </template>
+        <template v-else>
+            <p class="page-title">{{ route.path === '/accounts' ? 'Contas' : 'Transações' }}</p>
+        </template>
     </header>
 </template>
 
 <style scoṕed>
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
     display: flex;
     align-items: center;
 
@@ -19,5 +32,10 @@
 
 .logo {
     width: 8rem;
+}
+
+.page-title {
+    font-weight: bold;
+    text-align: center;
 }
 </style>

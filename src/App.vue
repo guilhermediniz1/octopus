@@ -29,6 +29,6 @@ onMounted(() => {
 
 <style scoped>
 .app-content {
-  height: 100vh;
+  height: 100%;
 }
 </style>
