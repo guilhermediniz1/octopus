@@ -1,18 +1,28 @@
 <script setup>
-    import { RouterLink, useRoute } from 'vue-router';
+    import { RouterLink, useRoute, useRouter } from 'vue-router';
     import { ref } from 'vue';
 
+    import { useStoreUser } from '../stores/storeUser';
     import InsertTransactionModal from '../Components/Transactions/InsertModal.vue';
     import InsertAccountModal from '../Components/Accounts/InsertModal.vue';
 
 // Route
     const route = useRoute()
+    const router = useRouter()
 
     function handleModal () {
         isInsertModalOpen.value = !isInsertModalOpen.value
     }
 
     const isInsertModalOpen = ref(false)
+    const isUserDropdownOpen = ref(false)
+
+// Logout user
+    const storeUser = useStoreUser()
+    function logoutUser() {
+        storeUser.logoutUser()
+        router.push('/auth')
+    }
 
 </script>
 
@@ -30,7 +40,15 @@
         <RouterLink to="/accounts" >
             <img src="../assets/icons/accounts.svg" alt="">
         </RouterLink>
+        <button @click="isUserDropdownOpen = !isUserDropdownOpen" class="user-button">
+            <img class="user-button__icon" src="../assets/icons/user.svg" alt="">
+        </button>
     </nav>
+    <div v-if="isUserDropdownOpen" class="user-menu">
+        <div class="user-menu__items">
+            <button type="button" class="button-delete" @click="logoutUser">Logout</button>
+        </div>
+    </div>
     <InsertTransactionModal @button-clicked="handleModal" v-if="isInsertModalOpen && route.fullPath == '/' || isInsertModalOpen && route.fullPath == '/transactions'" />
     <InsertAccountModal @button-clicked="handleModal" v-else-if="isInsertModalOpen && route.fullPath == '/accounts'" />
 </template>
@@ -41,6 +59,7 @@ nav {
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 50;
 
     height: 56px;
 
@@ -55,16 +74,44 @@ nav {
 .main-button {
     transform: translateY(-50%);
 
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
 
     border: none;
     border-radius: 50%;
 
     outline: none;
-    background-color: var(--black);
+    background: linear-gradient(45deg, var(--dark-green), var(--light-green));
 
     cursor: pointer;
+}
+
+.user-button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.user-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 40;
+
+    width: 75%;
+    height: 100%;
+    background-color: var(--light-gray);
+    backdrop-filter: blur(12px);
+}
+
+.user-menu__items {
+    padding: 1.5rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+
+    list-style: none;
 }
 
 </style>
