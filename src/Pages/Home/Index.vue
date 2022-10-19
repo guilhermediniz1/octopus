@@ -37,14 +37,14 @@
 
     display: grid;
 
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr;
 }
 .balance {
-    padding: 136px 0 56px;
+    padding: 1rem 1.5rem;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
 
     font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

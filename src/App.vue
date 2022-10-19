@@ -1,11 +1,10 @@
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import { onMounted } from 'vue';
-import { useStoreTransactions } from '@/stores/storeTransactions'; 
-import { useStoreAccounts } from '@/stores/storeAccounts';
 import { useStoreUser } from '@/stores/storeUser';
 
 import NavBar from './Layout/NavBar.vue'
+import Header from './Layout/Header.vue'
 
 // Store
 const storeUser = useStoreUser()
@@ -22,6 +21,7 @@ onMounted(() => {
 
 <template>
   <div class="app-content">
+    <Header v-if="route.path != '/auth' && route.path != '/auth/register'"/>
     <RouterView />
     <NavBar v-if="route.path != '/auth' && route.path != '/auth/register'" />
   </div>
