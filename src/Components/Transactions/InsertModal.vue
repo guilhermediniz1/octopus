@@ -44,7 +44,7 @@ function submitForm() {
                 <form class="modal__form" action="" @submit.prevent="submitForm" autocomplete="off">
                     <input class="transaction__description" type="text" name="description" id="description" placeholder="Descrição" v-model="form.description">
                     <input class="transaction__date" type="date" name="date" id="date" v-model="form.date">
-                    <input class="transaction__value" type="number" name="value" id="value" placeholder="R$100,00" v-model="form.value">
+                    <input class="transaction__value" type="number" step="0.01" name="value" id="value" placeholder="R$100,00" v-model="form.value">
                     <div class="transaction__type">
                         <label class="transaction__type__label" for="in">
                             <input class="transaction__type__radio" type="radio" name="type" id="in" value="in" v-model="form.type" required>
