@@ -1,6 +1,6 @@
 <script setup>
     import { useStoreTransactions } from '@/stores/storeTransactions';
-    import { onMounted, ref } from 'vue';
+    import { onMounted, onUpdated, ref } from 'vue';
     import Transaction from '../../Components/Transactions/Transaction.vue';
     import Chart from 'chart.js/auto';
 
@@ -9,43 +9,92 @@
     const storeTransactions = useStoreTransactions()
     
 // Chart
-    const chartRef = ref(null)
+    let myChart
+
+    // Pre built Code from Utils of Chart.js
+    const MONTHS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+    function months(config) {
+        var cfg = config || {};
+        var count = cfg.count || 12;
+        var section = cfg.section;
+        var values = [];
+        var i, value;
+
+        for (i = 0; i < count; ++i) {
+            value = MONTHS[Math.ceil(i) % 12];
+            values.push(value.substring(0, section));
+        }
+
+        return values;
+    }
+
+    let incomeValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+    let outcomeValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+
+    storeTransactions.incomeTransactions.forEach(tr => {
+        const [year, month] = tr.date.slice(0,7).split('-')
+
+        incomeValues[Number(month) - 1] += tr.value
+    })
+
+    storeTransactions.outcomeTransactions.forEach(tr => {
+        const [year, month] = tr.date.slice(0,7).split('-')
+
+        outcomeValues[Number(month) - 1] += tr.value
+    })
 
     onMounted(() => {
-        const labels = ['Jan', 'Fev', 'Mar', 'Mai', 'Abr', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        const labels = months({count: 12});
 
-        const myChart = new Chart(document.getElementById('chart'), {
+        myChart = new Chart(document.getElementById('chart'), {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [
                     {
                         label: 'Entrada',
-                        data: [65, 59, 80, 81, 56, 55, 40],
+                        data: incomeValues,
                         fill: true,
-                        borderColor: '#27F460',
+                    borderColor: '#27F460',
                         backgroundColor: 'rgba(39, 244, 96, .25)',
                         tension: 0.2
                     },
                     {
                         label: 'Saída',
-                        data: [67, 79, 50, 21, 26, 85, 80],
+                        data: outcomeValues,
                         fill: true,
-                        borderColor: '#F24C54',
+                    borderColor: '#F24C54',
                         backgroundColor: 'rgba(242, 76, 84, .25)',
                         tension: 0.2
                     },
                 ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Movimentações'
+                    },
+                }
             }
         })
         myChart
+    })
+
+    onUpdated(() => {
+        myChart.update()
     })
 </script>
 
 <template>
     <div class="grid-container">
         <div class="container" >
-            <div v-if="false" class="container__content">
+            <div class="chart-container">
+                <canvas id="chart" ref="chartRef"></canvas>
+            </div>
+            <div class="">
                 <strong class="container__title">Todas Transações</strong>
                 <div class="container__content">
                     <Transaction
@@ -58,9 +107,6 @@
                     :type="t.type"
                     />
                 </div>
-            </div>
-            <div class="chart-container">
-                <canvas id="chart" ref="chartRef"></canvas>
             </div>
         </div>
     </div>
@@ -76,13 +122,15 @@
 }
 
 .container {
-
+    max-height: 100%;
 
     padding: 24px 24px 56px 24px;
 
     border-radius: 16px 16px 0 0;
 
     background-color: #D9D9D9;
+
+    overflow: scroll;
 }
 
 .container__title {
@@ -93,8 +141,9 @@
 
 .chart-container {
     width: 100%;
-    height: 100%;
-    max-height: 20rem;
+    min-height: 16rem;
     margin: auto;
+
+    padding-bottom: 2rem;
 }
 </style>

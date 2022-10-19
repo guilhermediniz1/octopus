@@ -4,6 +4,7 @@ import { db } from '../firebase'
 import { v4 as uuid } from 'uuid'
 import { useStoreUser } from '@/stores/storeUser'
 import { useStoreAccounts } from '@/stores/storeAccounts'
+import { FileWatcherEventKind } from 'typescript'
 
 let transactionsCollectionRef
 let transactionsCollectionQuery
@@ -65,5 +66,16 @@ export const useStoreTransactions = defineStore('storeTransactions', {
             await deleteDoc(doc(db, 'User',storeUser.user.id,'Transaction', id));
         }
     },
-    getters: {}
+    getters: {
+        incomeTransactions() {
+            return this.transactions.filter(tr => {
+                return tr.type === 'in'
+            })
+        },
+        outcomeTransactions() {
+            return this.transactions.filter(tr => {
+                return tr.type === 'out'
+            })
+        }
+    }
 })
