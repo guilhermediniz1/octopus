@@ -37,6 +37,25 @@ a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+input:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+/* 
+    Remove arrows from number input
+*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 /* 
     Button styles
