@@ -129,8 +129,6 @@
     border-radius: 16px 16px 0 0;
 
     background-color: #D9D9D9;
-
-    overflow: scroll;
 }
 
 .container__title {
@@ -145,5 +143,10 @@
     margin: auto;
 
     padding-bottom: 2rem;
+}
+
+.container__content {
+    max-height: 50vh;
+    overflow: scroll;
 }
 </style>

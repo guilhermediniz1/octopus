@@ -125,15 +125,15 @@ label {
     Scrollbar Style
 */
 
-*::-webkit-scrollbar {
+body::-webkit-scrollbar, div::-webkit-scrollbar {
     width: .5rem;
 }
 
-*::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track, div::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-*::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
     background-color: #27F460;
     border-radius: .5rem;
 }
