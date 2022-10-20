@@ -41,7 +41,15 @@ export const useStoreAccounts = defineStore('storeAccounts', {
                 })
                 this.accounts = accounts
                 this.accountsLoaded = true
-            }, error => console.log('error.message: ', error.message))
+            }, error => {
+                Toastify({
+                    text: "😥 Ocorreu um erro inesperado. Tente Novamente.",
+                    duration: 3000,
+                    gravity: "top", 
+                    position: "right", 
+                    className: "toast--warning"
+                }).showToast();
+            })
         },
         clearAccounts() {
             this.accounts = []

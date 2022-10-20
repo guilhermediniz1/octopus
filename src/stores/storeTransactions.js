@@ -46,7 +46,15 @@ export const useStoreTransactions = defineStore('storeTransactions', {
                 })
                 this.transactions = transactions
                 this.transactionsLoaded = true
-            }, error => console.log('error.message: ', error.message))
+            }, error => {
+                Toastify({
+                    text: "😥 Ocorreu um erro inesperado. Tente Novamente.",
+                    duration: 3000,
+                    gravity: "top", 
+                    position: "right", 
+                    className: "toast--warning"
+                }).showToast();
+            })
         },
         clearTransactions() {
             this.transactions = []

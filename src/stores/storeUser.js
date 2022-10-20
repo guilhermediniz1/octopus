@@ -4,6 +4,7 @@ import { auth } from '@/firebase'
 import { useStoreTransactions } from '@/stores/storeTransactions'
 import { useStoreAccounts } from '@/stores/storeAccounts'
 import { useRouter } from 'vue-router'
+import Toastify from 'toastify-js'
 
 export const useStoreUser = defineStore('storeUser', {
   state: () => {
@@ -35,24 +36,46 @@ export const useStoreUser = defineStore('storeUser', {
     registerUser(credentials) {
       createUserWithEmailAndPassword(auth, credentials.email, credentials.password).then((userCredential) => {
         const user = userCredential.user
-        // console.log('user: ', user)
       }).catch((error) => {
-        // console.log('error.message: ', error.message)
+        Toastify({
+          text: "🧐 Ocorreu um erro. Tente Novamente.",
+          duration: 3000,
+          gravity: "top", 
+          position: "right", 
+          className: "toast--warning"
+        }).showToast();
       })
     },
     loginUser(credentials) {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((userCredential) => {
         const user = userCredential.user
-        // console.log('user: ', user)
       }).catch((error) => {
-        // console.log('error.message: ', error.message)
+        Toastify({
+          text: "🧐 Verifique seu Login e Senha.",
+          duration: 3000,
+          gravity: "top", 
+          position: "right", 
+          className: "toast--warning"
+        }).showToast();
       })
     },
     logoutUser() {
       signOut(auth).then(() => {
-        // console.log('User signed out')
+        Toastify({
+          text: "🫡 Sessão encerrada.",
+          duration: 3000,
+          gravity: "top", 
+          position: "right", 
+          className: "toast--neutral"
+        }).showToast();
       }).catch((error) => {
-        // console.log(error.message)
+        Toastify({
+          text: "🧨 Ocorreu um erro inesperado.",
+          duration: 3000,
+          gravity: "top", 
+          position: "right", 
+          className: "toast--warning"
+        }).showToast();
       })
     }
   }
