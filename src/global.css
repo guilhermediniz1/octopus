@@ -150,7 +150,7 @@ body::-webkit-scrollbar, div::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
     background-color: #27F460;
-    border-radius: .2rem;
+    border-radius: .3rem;
 }
 
 /* 

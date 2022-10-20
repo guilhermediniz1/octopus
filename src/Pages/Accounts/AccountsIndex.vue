@@ -16,6 +16,8 @@
                     :key="a.id"
                     :id="a.id"
                     :name="a.name"
+                    :balance="a.balance"
+                    :tag="a.tag"
                 />
             </div>
             <div v-else class="loading-container">
@@ -34,7 +36,6 @@
 <style scoped>
 .grid-container {
     height: 100vh;
-    padding-top: 4rem;
 
     display: grid;
     grid-template-rows: 1fr;
@@ -54,10 +55,5 @@
     font-size: 1rem;
     font-weight: bolder;
     color: var(--light-gray);
-}
-
-.container__content {
-    max-height: 70vh;
-    overflow: scroll;
 }
 </style>

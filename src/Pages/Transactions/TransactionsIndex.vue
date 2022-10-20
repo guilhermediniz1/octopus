@@ -124,7 +124,6 @@
 <style scoped>
 .grid-container {
     height: 100vh;
-    padding-top: 4rem;
     
     display: grid;
     grid-template-rows: 1fr;
@@ -152,10 +151,5 @@
     margin: auto;
 
     padding-bottom: 2rem;
-}
-
-.container__content {
-    max-height: 50vh;
-    overflow: scroll;
 }
 </style>

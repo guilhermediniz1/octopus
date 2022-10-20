@@ -12,7 +12,8 @@ import { useStoreAccounts } from '@/stores/storeAccounts'
 // Form data and submission
     const form = reactive({
         name: "",
-        balance: 0
+        balance: 0,
+        tag: ''
     })
 
     const emit = defineEmits(['buttonClicked'])
@@ -31,6 +32,21 @@ import { useStoreAccounts } from '@/stores/storeAccounts'
                 <div class="modal__dotch"></div>
                 <form class="modal__form" action="" @submit.prevent="submitForm" autocomplete="off">
                     <input class="account__name" type="text" name="name" id="name" placeholder="Nome para Conta" v-model="form.name">
+                    <select class="transaction__pay-method" name="pay-method" id="pay-method" v-model="form.tag">
+                            <option value="" selected disabled>Selecione a Tag</option>
+                            <option value="tag-black">Preto</option>
+                            <option value="tag-blue-purple">Azul - Roxo</option>
+                            <option value="tag-blue">Azul</option>
+                            <option value="tag-lightblue">Azul claro</option>
+                            <option value="tag-green-1">Cinza</option>
+                            <option value="tag-green-black">Verde 1</option>
+                            <option value="tag-lightblue">Verde - Preto</option>
+                            <option value="tag-orange">Laranja</option>
+                            <option value="tag-peach">Pêssego</option>
+                            <option value="tag-purple">Roxo</option>
+                            <option value="tag-red">Vermelho</option>
+                            <option value="tag-yellow">Amarelo</option>
+                        </select>
                     <input class="account__balance" type="number" step="0.01" name="balance" id="balance" placeholder="Saldo da Conta" v-model="form.balance">
                     <div class="button-group">
                         <button class="button button-cancel" @click.prevent="emit('buttonClicked')">Cancelar</button>

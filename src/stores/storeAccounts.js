@@ -35,7 +35,8 @@ export const useStoreAccounts = defineStore('storeAccounts', {
                 let acccount = {
                     id: doc.id,
                     name: doc.data().name,
-                    balance: doc.data().balance
+                    balance: doc.data().balance,
+                    tag: doc.data().tag
                 }
                 accounts.push(acccount)
                 })
@@ -54,10 +55,10 @@ export const useStoreAccounts = defineStore('storeAccounts', {
         clearAccounts() {
             this.accounts = []
         },
-        async addAccount({name, balance}) {
+        async addAccount({name, balance, tag}) {
             const storeUser = useStoreUser()
             const accountRef = doc(db, 'User', storeUser.user.id, 'Account', uuid());
-            setDoc(accountRef, { name, balance});
+            setDoc(accountRef, { name, balance, tag});
         },
         async deleteAccount(id) {
             const storeUser = useStoreUser()

@@ -43,7 +43,6 @@
 <style scoped>
 .grid-container {
     height: 100vh;
-    padding-top: 4rem;
 
     display: grid;
 
@@ -74,10 +73,5 @@
     font-size: 1rem;
     font-weight: bolder;
     color: var(--light-gray);
-}
-
-.container__content {
-    max-height: 70vh;
-    overflow: scroll;
 }
 </style>

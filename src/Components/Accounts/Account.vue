@@ -5,27 +5,28 @@
 
 // Props
     const props = defineProps({
+        id: String,
         name: String,
-        id: String
+        balance: Number,
+        tag: String        
     })
 
     const canDelete = ref(false)
     const isDeleteModalOpen = ref(false)
 
-    const pathToView = computed(() => {
-        return `/accounts/${props.id}`
-    })
-
+    function tagURL() { 
+        return new URL(`../../assets/tags/${props.tag}.svg`, import.meta.url).href
+    }
 </script>
 
 <template>
     <div class="account" @mouseover="canDelete = true" @mouseleave="canDelete = false">
-        <RouterLink :to="pathToView" class="account__content">
+        <div class="account__content">
             <div class="account__tag__container">
-                <img class="account__tag" src="../../assets/tags/tag-peach.svg" alt="">
+                <img class="account__tag" :src="tagURL()" alt="">
             </div>
             <p class="account__name" >{{ props.name }}</p>
-        </RouterLink>
+        </div>
         <button v-if="canDelete" class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
             <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
         </button>
