@@ -16,7 +16,7 @@
         </div>
         <div class="container" >
             <strong class="container__title">Últimas Transações</strong>
-            <div class="container__content">
+            <div v-if="storeTransactions.transactionsLoaded" class="container__content">
                 <Transaction
                   v-for="t in storeTransactions.transactions"
                   :key="t.id"
@@ -26,6 +26,15 @@
                   :value="t.value"
                   :type="t.type"
                   />
+            </div>
+            <div v-else class="loading-container">
+                <div class="loading">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
         </div>  
     </div>

@@ -10,13 +10,22 @@
     <div class="grid-container">
         <div class="container" >
             <strong class="container__title">Todas Contas</strong>
-            <div class="container__content">
+            <div v-if="storeAccounts.accountsLoaded" class="container__content">
                 <Account 
                     v-for="a in storeAccounts.accounts"
                     :key="a.id"
                     :id="a.id"
                     :name="a.name"
                 />
+            </div>
+            <div v-else class="loading-container">
+                <div class="loading">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
         </div>
     </div>

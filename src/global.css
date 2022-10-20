@@ -185,3 +185,52 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
     background-color: var(--red);
     color: var(--pure-white);
 }
+
+/* 
+    Loading animation
+*/
+.loading-container {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+.bar {
+    width: 16px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: #4ADE80;
+}
+  
+.bar:nth-child(1){
+    animation: loadAnimation 1s ease-in-out 0s alternate infinite;
+}
+
+.bar:nth-child(2){
+    animation: loadAnimation 1s ease-in-out .2s alternate infinite;
+}
+.bar:nth-child(3){
+    animation: loadAnimation 1s ease-in-out .4s alternate infinite;
+}
+.bar:nth-child(4){
+    animation: loadAnimation 1s ease-in-out .6s alternate infinite;
+}
+.bar:nth-child(5){
+    animation: loadAnimation 1s ease-in-out .8s alternate infinite;
+}
+
+/*  
+Keyframes
+*/
+
+@keyframes loadAnimation {
+    100% { transform: scaleY(.1); }
+}
