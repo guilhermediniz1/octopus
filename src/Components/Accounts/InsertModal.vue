@@ -38,9 +38,9 @@ import { useStoreAccounts } from '@/stores/storeAccounts'
                             <option value="tag-blue-purple">Azul - Roxo</option>
                             <option value="tag-blue">Azul</option>
                             <option value="tag-lightblue">Azul claro</option>
-                            <option value="tag-green-1">Cinza</option>
-                            <option value="tag-green-black">Verde 1</option>
-                            <option value="tag-lightblue">Verde - Preto</option>
+                            <option value="tag-gray">Cinza</option>
+                            <option value="tag-green">Verde 1</option>
+                            <option value="tag-green-black">Verde - Preto</option>
                             <option value="tag-orange">Laranja</option>
                             <option value="tag-peach">Pêssego</option>
                             <option value="tag-purple">Roxo</option>

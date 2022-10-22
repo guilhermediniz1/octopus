@@ -1,6 +1,6 @@
 <script setup>
     import { useStoreTransactions } from '@/stores/storeTransactions';
-    import { onMounted, onUpdated, ref } from 'vue';
+    import { onMounted, onUpdated } from 'vue';
     import Transaction from '../../Components/Transactions/Transaction.vue';
     import Chart from 'chart.js/auto';
 
@@ -123,9 +123,10 @@
 
 <style scoped>
 .grid-container {
-    height: 100vh;
+    height: 100%;
     
     display: grid;
+
     grid-template-rows: 1fr;
 }
 

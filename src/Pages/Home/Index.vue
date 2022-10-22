@@ -42,11 +42,13 @@
 
 <style scoped>
 .grid-container {
-    height: 100vh;
+  grid-area: content;
 
-    display: grid;
+  height: 100%;
 
-    grid-template-rows: auto 1fr;
+  display: grid;
+
+  grid-template-rows: auto 1fr;
 }
 .balance {
     padding: 1rem 1.5rem;

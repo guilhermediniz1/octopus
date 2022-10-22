@@ -56,11 +56,6 @@
 <style scoped>
 
 nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 50;
-
     height: 56px;
 
     display: flex;
@@ -70,7 +65,6 @@ nav {
     background-color: var(--black);
     width: 100%;
 }
-
 .main-button {
     transform: translateY(-65%);
 

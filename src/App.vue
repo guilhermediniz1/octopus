@@ -29,6 +29,16 @@ onMounted(() => {
 
 <style scoped>
 .app-content {
-  height: 100%;
+  height: 100vh;
+
+  display: grid;
+
+  grid-template-areas: 
+    'header' 
+    'content' 
+    'nav';
+
+  grid-template-rows: auto 1fr auto;
 }
+
 </style>

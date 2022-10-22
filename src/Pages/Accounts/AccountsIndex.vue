@@ -35,7 +35,7 @@
 
 <style scoped>
 .grid-container {
-    height: 100vh;
+    height: 100%;
 
     display: grid;
     grid-template-rows: 1fr;
