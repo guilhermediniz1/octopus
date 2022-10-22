@@ -21,12 +21,14 @@
 
 <template>
     <div class="account" @mouseover="canDelete = true" @mouseleave="canDelete = false">
-        <div class="account__content">
-            <div class="account__tag__container">
-                <img class="account__tag" :src="tagURL()" alt="">
-            </div>
-            <p class="account__name" >{{ props.name }}</p>
-        </div>
+        <RouterLink :to="'accounts/' + props.id">
+          <div class="account__content">
+              <div class="account__tag__container">
+                  <img class="account__tag" :src="tagURL()" alt="">
+              </div>
+              <p class="account__name" >{{ props.name }}</p>
+          </div>
+        </RouterLink>
         <button v-if="canDelete" class="button__delete" @click="isDeleteModalOpen = !isDeleteModalOpen">
             <img class="button__icon" src="../../assets/icons/delete.svg" alt="">
         </button>

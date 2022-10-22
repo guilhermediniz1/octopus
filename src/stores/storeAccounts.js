@@ -42,7 +42,7 @@ export const useStoreAccounts = defineStore('storeAccounts', {
                 })
                 this.accounts = accounts
                 this.accountsLoaded = true
-            }, error => {
+            }, (error) => {
                 Toastify({
                     text: "😥 Ocorreu um erro inesperado. Tente Novamente.",
                     duration: 3000,
@@ -50,6 +50,7 @@ export const useStoreAccounts = defineStore('storeAccounts', {
                     position: "right", 
                     className: "toast--warning"
                 }).showToast();
+                console.warn(error)
             })
         },
         clearAccounts() {
@@ -75,6 +76,13 @@ export const useStoreAccounts = defineStore('storeAccounts', {
 
             await updateDoc(doc(db, 'User', storeUser.user.id, 'Account', account_id), {
                 balance: operation === 'in' ? account[0].balance + value : account[0].balance - value 
+            })
+        },
+        async updateAccountBalance(account_id, new_value) {
+            const storeUser = useStoreUser()
+
+            await updateDoc(doc(db, 'User', storeUser.user.id, 'Account', account_id), {
+                balance: new_value 
             })
         }
     },

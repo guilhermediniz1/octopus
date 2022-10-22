@@ -15,7 +15,7 @@
     const emit = defineEmits(['buttonClicked'])
 
     function submitForm() {
-        storeAccounts.updateBalance(route.params.id , balance.value)
+        storeAccounts.updateAccountBalance(route.params.id , balance.value)
         emit('buttonClicked')
     }
     
@@ -27,7 +27,7 @@
             <div class="modal">
                 <div class="modal__dotch"></div>
                 <form class="modal__form" action="" @submit.prevent="submitForm" autocomplete="off">
-                    <input class="account__balance" type="text" name="balance" id="balance" placeholder="Informe o novo saldo" v-model="balance">
+                    <input class="account__balance" type="number" step="0.01" name="balance" id="balance" placeholder="Informe o novo saldo" v-model="balance">
                     <div class="button-group">
                         <button class="button button-cancel" @click.prevent="emit('buttonClicked')">Cancelar</button>
                         <button class="button button-add" type="submit">Salvar</button>

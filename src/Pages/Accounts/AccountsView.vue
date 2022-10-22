@@ -1,6 +1,6 @@
 <script setup>
 
-    import { onMounted, reactive, ref } from 'vue';
+    import { reactive, ref, watchEffect } from 'vue';
     import { useRoute } from 'vue-router';
     import { useStoreAccounts } from '@/stores/storeAccounts';
     import EditModal from '../../Components/Accounts/EditModal.vue';
@@ -10,22 +10,28 @@
 
 // Route instance
     const route = useRoute()
-
     const isEditing = ref(false)
 
-    const currentAccount = reactive({})
+    function updateValues() {
+        currentAccount.name = storeAccounts.accounts.filter(el => el.id === route.params.id)[0].name
+        currentAccount.balance = storeAccounts.accounts.filter(el => el.id === route.params.id)[0].balance
+        currentAccount.tag = storeAccounts.accounts.filter(el => el.id === route.params.id)[0].tag
+    }
 
-    onMounted(() => {
-        currentAccount.name = storeAccounts.getAccountById(route.params.id).name
-        currentAccount.balance = storeAccounts.getAccountById(route.params.id).balance
-    })
-    
+    const currentAccount = reactive({ name: '', balance: 0, tag: '' })
+  
+    watchEffect(() => updateValues() ) 
+
+
+    function tagURL() { 
+        return new URL(`../../assets/tags/${currentAccount.tag}.svg`, import.meta.url).href
+    }
 </script>
 
 <template>
     <div class="container">
         <div class="account__header">
-            <img class="account__header__tag" src="../../assets/tags/tag-lightblue.svg" alt="">
+            <img class="account__header__tag" :src="tagURL()" alt="">
             <h1 class="account__header__name">{{ currentAccount.name }}</h1>
         </div>
         <div class="account__info">
@@ -34,7 +40,6 @@
         </div>
         <div class="menu">
             <button @click="isEditing = !isEditing" class="menu__item">Editar saldo</button>
-            <div class="menu__item">Cartões</div>
         </div>
     </div>
     <EditModal @button-clicked="isEditing = !isEditing" v-if="isEditing" />
@@ -42,11 +47,12 @@
 
 <style scoped>
 .container {
+    grid-area: content;
+
     height: 100%;
 
-    padding-top: 80px;
-    padding-inline: 8px;
-    padding-bottom: 120px;
+    padding-inline: 1.5rem;
+    padding-bottom: 3rem;  
 
     display: flex;
     flex-direction: column;
@@ -89,8 +95,7 @@
 
 .menu {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+
     gap: 16px;
 
     font-family: 'DM Sans';

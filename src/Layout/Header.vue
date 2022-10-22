@@ -13,7 +13,7 @@
             </RouterLink>
         </template>
         <template v-else>
-            <p class="page-title">{{ route.path === '/accounts' ? 'Contas' : 'Transações' }}</p>
+            <p class="page-title">{{ route.path.includes('/accounts') ? 'Contas' : 'Transações' }}</p>
         </template>
     </header>
 </template>
