@@ -43,12 +43,12 @@
         <button @click="isUserDropdownOpen = !isUserDropdownOpen" class="user-button">
             <img class="user-button__icon" src="../assets/icons/user.svg" alt="">
         </button>
-    </nav>
-    <div v-if="isUserDropdownOpen" class="user-menu">
-        <div class="user-menu__items">
+        <div v-if="isUserDropdownOpen" class="user-menu">
+          <div class="user-menu__items">
             <button type="button" class="button-delete" @click="logoutUser">Logout</button>
+          </div>
         </div>
-    </div>
+     </nav>
     <InsertTransactionModal @button-clicked="handleModal" v-if="isInsertModalOpen && route.fullPath == '/' || isInsertModalOpen && route.fullPath == '/transactions'" />
     <InsertAccountModal @button-clicked="handleModal" v-else-if="isInsertModalOpen && route.fullPath == '/accounts'" />
 </template>
@@ -56,6 +56,7 @@
 <style scoped>
 
 nav {
+    position: relative;
     height: 56px;
 
     display: flex;
@@ -87,6 +88,7 @@ nav {
 }
 
 .user-button {
+    position: relative;
     background-color: transparent;
     outline: none;
     border: none;
@@ -94,15 +96,22 @@ nav {
 }
 
 .user-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
+    position: absolute; 
+    top: -1rem;
+    right: 1.5rem;
     z-index: 40;
 
-    width: 75%;
-    height: 100%;
-    background-color: var(--light-gray);
+    width: 90%;
+    max-width: 20rem;
+    height: 10rem;
+
+    transform: translateY(-110%);
+
+    background-color:  rgba(10, 10, 10, .5);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .25);
     backdrop-filter: blur(12px);
+    border-radius: 8px;
+
 }
 
 .user-menu__items {
