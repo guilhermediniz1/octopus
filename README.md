@@ -67,7 +67,7 @@
 
 [![Tela de Autenticação][product-screenshot]](https://octopus-financial.netlify.app/)
 
-Este projeto foi desenvolvido com o intuito de auxiliar os usuários a administrarem a entrada e saída de dinheiro no dia a dia. No momento, ele contém algumas funcionalidades básicas e trivais, porém, sugestões de melhori sempre serão bem vindas.
+Este projeto foi desenvolvido com o intuito de auxiliar os usuários a administrarem a entrada e saída de dinheiro no dia a dia. No momento, ele contém algumas funcionalidades básicas e trivais, porém, sugestões de melhoria sempre serão bem vindas.
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 
