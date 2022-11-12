@@ -65,6 +65,9 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
+> ⚠️ Este projeto será migrado para o framework Quasar
+
+
 [![Tela de Autenticação][product-screenshot]](https://octopus-financial.netlify.app/)
 
 Este projeto foi desenvolvido com o intuito de auxiliar os usuários a administrarem a entrada e saída de dinheiro no dia a dia. No momento, ele contém algumas funcionalidades básicas e trivais, porém, sugestões de melhoria sempre serão bem vindas.
